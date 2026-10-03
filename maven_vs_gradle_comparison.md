@@ -1,6 +1,24 @@
-# 8.7 Compare Maven and Gradle
+# Worksheet 4: Gradle Migration & Verification Report
 
-## Summary Comparison Table
+**Repository Link:** [https://github.com/RicardoSilva-52363/Worksheet4_52363](https://github.com/RicardoSilva-52363/Worksheet4_52363)
+
+---
+
+## 8.1 – 8.6 Worksheet Step Summaries
+
+* **Step 8.1 — Dependency Failure:** Missing Jackson dependency resulted in compilation error: `error: package com.fasterxml.jackson.databind does not exist`.
+* **Step 8.2 — Dependency Tree:** Added `com.fasterxml.jackson.core:jackson-databind:2.22.2`. Resolved transitive dependencies `jackson-core` and `jackson-annotations`.
+* **Step 8.3 — Fat JAR Execution:** Application executed via `java -jar build/libs/fleetcheck-1.0.0.jar`, producing output:
+  `FleetCheck 1.0 | Vehicles loaded: 4 | Vehicles requiring service: 1 | Average mileage: 37000 km`
+* **Step 8.4 — Gradle Wrapper:** Configured `gradlew` and `gradlew.bat` for portable, build-tool-independent builds.
+* **Step 8.5 — CI Pipeline:** Integrated GitHub Actions workflow `.github/workflows/gradle-ci.yml` with passing automated builds.
+* **Step 8.6 — CycloneDX SBOM:** Generated software component inventory at `build/reports/bom.json` using `.\gradlew.bat cyclonedxBom`.
+
+---
+
+## 8.7 Compare Maven and Gradle
+
+### Summary Comparison Table
 
 | Task | Maven | Gradle |
 | :--- | :--- | :--- |
@@ -15,12 +33,12 @@
 
 ---
 
-## Final Question & Answer
+### Final Question & Answer
 
-### Question:
+#### Question:
 *Both Maven and Gradle built exactly the same FleetCheck application. What changed: the software or the build process?*
 
-### Answer:
+#### Answer:
 **Only the build process changed, not the software.**
 
 The underlying Java source code (`src/main/java`), domain logic, unit tests, runtime dependencies, and final application output remained identical. What changed was the **automation toolchain and build environment**:
