@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'org.cyclonedx.bom' version '1.10.0'
 }
 
 group = 'pt.upt.softwarequality'
@@ -8,6 +9,11 @@ version = '1.0.0'
 
 repositories {
     mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 application {
@@ -33,4 +39,13 @@ jar {
             it.isDirectory() ? it : zipTree(it)
         }
     }
+}
+
+cyclonedxBom {
+    includeConfigs = ["runtimeClasspath"]
+    skipConfigs = ["compileClasspath", "testCompileClasspath"]
+    projectType = "application"
+    schemaVersion = "1.5"
+    outputFormat = "json"
+    outputName = "bom"
 }
